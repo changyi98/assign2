@@ -1,12 +1,14 @@
 int numFrames = 15;//圖片數量
 PImage[] images = new PImage[numFrames];//圖片儲存
 int condition;//場景切換
-int xPos = 320, yPos = 80;
-color c1 = color(124, 204, 25);
-color c2 = color(255, 255, 0);
-color c3 = color(253, 184, 19);
-int x1 = int (random(0,560));
-int x2 = int (random(240,400));
+int xPos = 320, yPos = 80;//地鼠的起始位子
+color c1 = color(124, 204, 25);//草地
+color c2 = color(255, 255, 0);//太陽
+color c3 = color(253, 184, 19);//太陽
+int x1 = int (random(0,560));//白菜
+int x2 = int (random(240,400));//白菜
+int s = 0;//兵士
+int s2 = int (random(240,400));//兵士
 
 void setup()
 {
@@ -62,7 +64,8 @@ void draw()
     ellipse(580, 60, 120, 120);
     fill(c3);
     ellipse(580, 60, 105, 105);
-
+    
+    image(images[5],s,s2);
     image(images[6], xPos, yPos);
     image(images[8],x1,x2);
   }
@@ -78,6 +81,11 @@ void draw()
     {
       image(images[13], 248, 360, 144, 60);
     }
+  }
+  s=s+2;
+  if(s > 640)
+  {
+    s = -80;
   }
 }
 
