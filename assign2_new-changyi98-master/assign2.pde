@@ -29,7 +29,6 @@ void setup()
   
 }
 
-
 void draw()
 {
   // Game Start
@@ -81,8 +80,6 @@ void draw()
     }
   }
 }
-
-
 
 void mousePressed()
 {
