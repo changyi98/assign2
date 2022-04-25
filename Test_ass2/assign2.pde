@@ -5,10 +5,10 @@ int xPos = 320, yPos = 80;//地鼠的起始位子
 color c1 = color(124, 204, 25);//草地
 color c2 = color(255, 255, 0);//太陽
 color c3 = color(253, 184, 19);//太陽
-int x1 = int (random(0,560));//白菜
-int x2 = int (random(240,400));//白菜
+int x1 = int (random(0, 560));//白菜
+int x2 = int (random(240, 400));//白菜
 int s = 0;//兵士
-int s2 = int (random(240,400));//兵士
+int s2 = int (random(240, 400));//兵士
 
 void setup()
 {
@@ -28,7 +28,6 @@ void setup()
   images[12] = loadImage("img/gameover.jpg");//結束畫面
   images[13] = loadImage("img/restartNormal.png");//重新開始按鈕（白）
   images[14] = loadImage("img/restartHovered.png");//重新開始按鈕（黃）
-  
 }
 
 void draw()
@@ -45,14 +44,14 @@ void draw()
       image(images[1], 248, 360, 144, 60);
     }
   }
-  
+
   // Game Run
   if (condition == 1)
   {
     image(images[3], 0, 0);
     image(images[4], 0, 160);
-    image(images[7], 10, 10);
-    image(images[7], 80, 10);
+    //image(images[7], 10, 10);
+    //image(images[7], 80, 10);
 
     fill(c1);
     rect(0, 145, 640, 15);
@@ -60,12 +59,24 @@ void draw()
     ellipse(580, 60, 120, 120);
     fill(c3);
     ellipse(580, 60, 105, 105);
-    
-    image(images[5],s,s2);
-    image(images[6], xPos, yPos);
-    image(images[8],x1,x2);
+
+    if (dist(s, s2, xPos, yPos)<80)
+    {
+      condition = 2;
+    } else {
+      image(images[7], 10, 10);
+      image(images[7], 80, 10);
+    }
+
+    if (dist(x1,x2, xPos, yPos)<80)
+    {
+      image(images[7], 10, 10);      
+    }
+    image(images[5], s, s2);//兵士
+    image(images[6], xPos, yPos);//地鼠
+    image(images[8], x1, x2);//白菜
   }
-  
+
   // Game Lose
   if (condition == 2)
   {
@@ -79,7 +90,7 @@ void draw()
     }
   }
   s=s+2;
-  if(s > 640)
+  if (s > 640)
   {
     s = -80;
   }
@@ -93,12 +104,12 @@ void mousePressed()
     {
       condition = 1;
     }
-    if (condition == 2)
+  }
+  if (condition == 2)
+  {
+    if (mouseButton == LEFT && dist(320, 390, mouseX, mouseY)<50)
     {
-      if (mouseButton == LEFT && dist(320, 390, mouseX, mouseY)<50)
-      {
-        condition = 1;
-      }
+      condition = 1;
     }
   }
 }
